@@ -14,6 +14,7 @@ yarn-error.log*
 .npm/
 
 .parcel-cache/
+.env
 
 # FIXME: temporary
 .clasp.json
