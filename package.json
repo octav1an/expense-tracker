@@ -1,0 +1,25 @@
+{
+  "name": "gas-financial-app",
+  "version": "1.0.0",
+  "description": "Expense tracker",
+  "scripts": {
+    "gstart": "clasp push --watch",
+    "start": "parcel client/index.html --dist-dir ./build",
+    "build": "parcel build client/index.html --dist-dir ./build"
+  },
+  "keywords": [
+    "finance"
+  ],
+  "author": "Octavian Catlabuga",
+  "license": "MIT",
+  "devDependencies": {
+    "@google/clasp": "^2.5.0",
+    "@types/google-apps-script": "^1.0.91",
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
