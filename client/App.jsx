@@ -16,6 +16,16 @@ function a11yProps(index) {
   };
 }
 
+const getTabStyles = (color) => ({
+  color: (theme) => theme.palette[color].main,
+  "&.Mui-selected": {
+    color: (theme) => theme.palette[color].main,
+  },
+  "&:hover": {
+    color: (theme) => theme.palette[color].dark,
+  },
+});
+
 export const App = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
@@ -36,24 +46,37 @@ export const App = () => {
           value={selectedTab}
           onChange={handleChange}
           aria-label="basic tabs example"
+          sx={{
+            "& .MuiTabs-indicator": {
+              backgroundColor: (theme) =>
+                selectedTab === 0
+                  ? theme.palette.personalSpace.main
+                  : selectedTab === 1
+                  ? theme.palette.commonSpace.main
+                  : theme.palette.foodSpace.main,
+            },
+          }}
         >
           <Tab
             icon={<PersonIcon />}
             iconPosition="start"
             label="Personal"
             {...a11yProps(0)}
+            sx={getTabStyles("personalSpace")}
           />
           <Tab
             icon={<GroupIcon />}
             iconPosition="start"
             label="Common"
             {...a11yProps(1)}
+            sx={getTabStyles("commonSpace")}
           />
           <Tab
             icon={<LunchDiningIcon />}
             iconPosition="start"
             label="Food"
             {...a11yProps(2)}
+            sx={getTabStyles("foodSpace")}
           />
         </Tabs>
         <TabPanel tabValue={selectedTab} />

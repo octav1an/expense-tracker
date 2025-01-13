@@ -1,30 +1,30 @@
 import TextField from "@mui/material/TextField";
-import { borderBottom, styled } from "@mui/system";
+import { styled } from "@mui/system";
 
-const StyledTextField = styled(TextField)({
+const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiFilledInput-root": {
-    backgroundColor: "#fcfcfc",
+    backgroundColor: theme.palette.personalSpace.background,
     "&:hover": {
-      borderBottomColor: " #dec2ff",
-      backgroundColor: "#faf6ff",
+      borderBottomColor: theme.palette.personalSpace.placeholder,
+      backgroundColor: theme.palette.personalSpace.backgroundHover,
     },
     "&:before": {
-      borderBottomColor: " #dec2ff",
+      borderBottomColor: theme.palette.personalSpace.placeholder,
     },
   },
   "&& .MuiFilledInput-underline": {
-    borderBottomColor: "#dec2ff",
+    borderBottomColor: theme.palette.personalSpace.placeholder,
     "&:hover:before": {
-      borderBottomColor: "#dec2ff",
+      borderBottomColor: theme.palette.personalSpace.placeholder,
     },
   },
   "& .MuiInputLabel-root": {
-    color: "#dec2ff",
+    color: theme.palette.personalSpace.placeholder,
   },
   "& .MuiInputBase-input": {
-    color: "#434343",
+    color: theme.palette.personalSpace.placeholder,
   },
-});
+}));
 
 export default Personal = () => {
   return (
