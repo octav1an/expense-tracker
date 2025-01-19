@@ -1,40 +1,20 @@
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/system";
-
-const StyledTextField = styled(TextField)(({ theme }) => ({
-  "& .MuiFilledInput-root": {
-    backgroundColor: theme.palette.personalSpace.background,
-    "&:hover": {
-      borderBottomColor: theme.palette.personalSpace.placeholder,
-      backgroundColor: theme.palette.personalSpace.backgroundHover,
-    },
-    "&:before": {
-      borderBottomColor: theme.palette.personalSpace.placeholder,
-    },
-  },
-  "&& .MuiFilledInput-underline": {
-    borderBottomColor: theme.palette.personalSpace.placeholder,
-    "&:hover:before": {
-      borderBottomColor: theme.palette.personalSpace.placeholder,
-    },
-  },
-  "& .MuiInputLabel-root": {
-    color: theme.palette.personalSpace.placeholder,
-  },
-  "& .MuiInputBase-input": {
-    color: theme.palette.personalSpace.placeholder,
-  },
-}));
+import Stack from "@mui/material/Stack";
+import TextField from "./TextField";
+import DatePicker from "./DatePicker";
 
 export default Personal = () => {
   return (
-    <div>
-      <StyledTextField
+    <Stack spacing={3} direction="column">
+      <DatePicker colorSpace="personalSpace" />
+      <TextField id="outlined-basic" label="Amount (€)" color="personalSpace" />
+      <TextField id="outlined-basic" label="Category" color="personalSpace" />
+      <TextField
         id="outlined-basic"
-        label="Outlined"
-        variant="filled"
+        label="Sub-category"
         color="personalSpace"
       />
-    </div>
+      <TextField id="outlined-basic" label="Shop" color="personalSpace" />
+      <TextField id="outlined-basic" label="Details" color="personalSpace" />
+    </Stack>
   );
 };
