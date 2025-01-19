@@ -3,7 +3,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "./TextField";
 
-export default CssDatePicker = ({ label, colorSpace }) => {
+import dayjs from "dayjs";
+
+export default StyledDatePicker = ({ label, colorSpace, required }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
@@ -12,8 +14,9 @@ export default CssDatePicker = ({ label, colorSpace }) => {
         slots={{
           textField: TextField,
         }}
+        defaultValue={dayjs(new Date())}
         slotProps={{
-          textField: { colorSpace },
+          textField: { colorSpace, required },
         }}
       />
     </LocalizationProvider>
