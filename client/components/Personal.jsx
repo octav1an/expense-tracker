@@ -26,7 +26,12 @@ export default Personal = () => {
         required
       />
       <TextField id="outlined-basic" label="Shop" color="personalSpace" />
-      <TextField id="outlined-basic" label="Details" color="personalSpace" />
+      <TextField
+        id="outlined-basic"
+        label="Details"
+        color="personalSpace"
+        multiline
+      />
     </Stack>
   );
 };

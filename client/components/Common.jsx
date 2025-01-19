@@ -29,7 +29,12 @@ export default Common = () => {
       />
       <Checkbox colorSpace="commonSpace" />
       <TextField id="outlined-basic" label="Shop" colorSpace="commonSpace" />
-      <TextField id="outlined-basic" label="Details" colorSpace="commonSpace" />
+      <TextField
+        id="outlined-basic"
+        label="Details"
+        colorSpace="commonSpace"
+        multiline
+      />
     </Stack>
   );
 };
