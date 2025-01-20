@@ -8,4 +8,4 @@ source .env
 [  -d $BUILD_DIR ] || mkdir $BUILD_DIR
 
 cp -r server/ $BUILD_DIR
-
+cp dist/index.html $BUILD_DIR
