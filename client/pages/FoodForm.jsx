@@ -7,12 +7,14 @@ import DatePicker from "../components/DatePicker";
 import { FOOD_SHOPS } from "../constants";
 
 export default Food = () => {
-  const [formData, setFormData] = React.useState({
-    date: dayjs(new Date()),
+  const initFormData = {
+    date: dayjs(new Date()).format("YYYY-MM-DD"),
     amount: "",
     shop: "",
     details: "",
-  });
+  };
+
+  const [formData, setFormData] = React.useState(initFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,8 +25,7 @@ export default Food = () => {
   };
 
   const handleDateChange = (date) => {
-    // Date picker on change is different and only exposes the date directly
-    console.log(date);
+    // Date picker on change is different and only exposes the date directly not an event
     setFormData((prevData) => ({
       ...prevData,
       ["date"]: date,
@@ -40,7 +41,6 @@ export default Food = () => {
     <Box component="form" onSubmit={handleSubmit}>
       <Stack spacing={3} direction="column">
         <DatePicker
-          name="date"
           label="Date"
           colorSpace="foodSpace"
           required
