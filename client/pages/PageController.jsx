@@ -1,7 +1,6 @@
 import React from "react";
-import Personal from "./Personal";
-import Common from "./Common";
-import Food from "./Food";
+import SharedForm from "./SharedForm";
+import Food from "./FoodForm";
 
 export default PageController = ({ tabValue }) => {
   const [date, setDate] = React.useState(); // Maybe set it to today?
@@ -14,14 +13,15 @@ export default PageController = ({ tabValue }) => {
   switch (tabValue) {
     case 0:
       componentToRender = (
-        <Personal
-        // category={category}
-        // onSetCategory={(e) => setCategory(e.target.value)}
+        <SharedForm
+          pageType="personalSpace"
+          // category={category}
+          // onSetCategory={(e) => setCategory(e.target.value)}
         />
       );
       break;
     case 1:
-      componentToRender = <Common />;
+      componentToRender = <SharedForm pageType="commonSpace" />;
       break;
     case 2:
       componentToRender = <Food />;

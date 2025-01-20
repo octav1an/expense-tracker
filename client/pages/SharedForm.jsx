@@ -4,19 +4,18 @@ import dayjs from "dayjs";
 
 import TextField from "../components/TextField";
 import DatePicker from "../components/DatePicker";
+import Checkbox from "../components/Checkbox";
 import SubmitFormButtons from "../components/SubmitFormButtons";
 import { CATEGORIES } from "../constants";
 import { getSubCategory } from "../utils";
 
-export default Personal = ({}) => {
+export default SharedForm = ({ pageType }) => {
   const [date, setDate] = React.useState(dayjs(new Date()));
   const [amount, setAmount] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [subCategory, setSubCategory] = React.useState("");
   const [shop, setShop] = React.useState("");
   const [details, setDetails] = React.useState("");
-
-  console.log(date, amount, category, subCategory, shop, details);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -28,14 +27,14 @@ export default Personal = ({}) => {
     <Stack spacing={3} direction="column">
       <DatePicker
         label="Date"
-        colorSpace="personalSpace"
+        colorSpace={pageType}
         required
         value={date}
         onChange={(e) => setDate(e)}
       />
       <TextField
         label="Amount (€)"
-        colorSpace="personalSpace"
+        colorSpace={pageType}
         type="number"
         required
         value={amount}
@@ -43,7 +42,7 @@ export default Personal = ({}) => {
       />
       <TextField
         label="Category"
-        colorSpace="personalSpace"
+        colorSpace={pageType}
         required
         select
         value={category}
@@ -57,7 +56,7 @@ export default Personal = ({}) => {
       </TextField>
       <TextField
         label="Sub-category"
-        colorSpace="personalSpace"
+        colorSpace={pageType}
         required
         select
         value={subCategory}
@@ -69,21 +68,22 @@ export default Personal = ({}) => {
           </MenuItem>
         ))}
       </TextField>
+      {pageType === "commonSpace" && <Checkbox colorSpace={pageType} />}
       <TextField
         label="Shop"
-        colorSpace="personalSpace"
+        colorSpace={pageType}
         value={shop}
         onChange={(e) => setShop(e.target.value)}
       />
       <TextField
         label="Details"
-        colorSpace="personalSpace"
+        colorSpace={pageType}
         value={details}
         onChange={(e) => setDetails(e.target.value)}
         multiline
       />
       <SubmitFormButtons
-        colorSpace="personalSpace"
+        colorSpace={pageType}
         onSubmitClick={() => console.log("click submit")}
         onResetClick={() => console.log("click reset")}
       />
