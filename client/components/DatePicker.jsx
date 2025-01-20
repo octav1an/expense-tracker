@@ -3,8 +3,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "./TextField";
 
-import dayjs from "dayjs";
-
 export default StyledDatePicker = (props) => {
   const { colorSpace, required, ...otherProps } = props;
   return (
@@ -15,8 +13,17 @@ export default StyledDatePicker = (props) => {
         slots={{
           textField: TextField,
         }}
+        format="DD/MM/YYYY"
         slotProps={{
-          textField: { colorSpace, required },
+          textField: {
+            colorSpace,
+            required,
+            sx: (theme) => ({
+              "& .MuiSvgIcon-root": {
+                color: theme.palette[colorSpace]?.light,
+              },
+            }),
+          },
         }}
       />
     </LocalizationProvider>
