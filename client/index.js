@@ -12,7 +12,6 @@ const theme = createTheme({
       main: "#995ce8",
       light: "#b97eff",
       dark: "#7a46b5",
-      // placeholder: "#dec2ff", // Input placeholder color
       placeholder: "#d7b4ff", // Input placeholder color
       background: "#fcfcfc", // Input background color
       backgroundHover: "#f1f1f1", // Input background color on hover
