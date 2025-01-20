@@ -5,16 +5,16 @@ import TextField from "./TextField";
 
 import dayjs from "dayjs";
 
-export default StyledDatePicker = ({ label, colorSpace, required }) => {
+export default StyledDatePicker = (props) => {
+  const { colorSpace, required, ...otherProps } = props;
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
-        label={label}
-        colorSpace="personalSpace"
+        {...otherProps}
+        colorSpace={colorSpace}
         slots={{
           textField: TextField,
         }}
-        defaultValue={dayjs(new Date())}
         slotProps={{
           textField: { colorSpace, required },
         }}

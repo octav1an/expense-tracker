@@ -29,38 +29,50 @@ const CssTextField = styled(TextField, {
   },
 }));
 
-const isNumber = (value, type) => {
-  if (type == "number") {
-    setError(!isNaN(value) && value.trim() !== "");
-  }
-};
+const StyledPaper = styled("div", {
+  shouldForwardProp: (prop) => prop !== "colorSpace",
+})(({ theme, colorSpace }) => ({
+  backgroundColor: theme.palette[colorSpace].background,
+  color: "#444444",
+  boxShadow: theme.shadows[8],
+}));
 
 export default StyledTextComponent = (props) => {
-  const [error, setError] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  // const [value, setValue] = React.useState("");
 
-  const { colorSpace = "personalSpace", type, ...otherProps } = props;
+  const { colorSpace = "personalSpace", ...otherProps } = props;
   otherProps;
 
-  const handleChange = (e) => {
-    const inputValue = e.target.value;
-    if (type === "number") {
-      if (/^\d*\.?\d*$/.test(inputValue)) {
-        setValue(inputValue);
-      }
-    } else {
-      setValue(inputValue);
-    }
-  };
+  // const handleChange = (e) => {
+  //   const inputValue = e.target.value;
+  //   if (type === "number") {
+  //     if (/^\d*\.?\d*$/.test(inputValue)) {
+  //       setValue(inputValue);
+  //     }
+  //   } else {
+  //     setValue(inputValue);
+  //     props.onChange?.(e);
+  //   }
+  // };
 
   return (
     <CssTextField
       {...otherProps}
-      value={value}
+      // value={value}
       variant="filled"
-      onChange={(e) => handleChange(e)}
+      // onChange={(e) => handleChange(e)}
       color={colorSpace}
       colorSpace={colorSpace}
+      slotProps={{
+        select: {
+          MenuProps: {
+            PaperProps: {
+              component: StyledPaper, // Attach the custom styled Paper
+              colorSpace: colorSpace,
+            },
+          },
+        },
+      }}
     />
   );
 };
