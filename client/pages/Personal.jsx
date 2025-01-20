@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, MenuItem, Stack } from "@mui/material";
 
-import TextField from "./TextField";
-import DatePicker from "./DatePicker";
-import SubmitFormButtons from "./SubmitFormButtons";
+import TextField from "../components/TextField";
+import DatePicker from "../components/DatePicker";
+import SubmitFormButtons from "../components/SubmitFormButtons";
 import { CATEGORIES } from "../constants";
 import { getSubCategory } from "../utils";
 

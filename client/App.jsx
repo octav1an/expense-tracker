@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import TabPanel from "./components/TabPanel";
+import TabPanel from "./pages/TabPanel";
 import Stack from "@mui/material/Stack";
 
 import PersonIcon from "@mui/icons-material/Person";
