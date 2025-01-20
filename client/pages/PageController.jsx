@@ -3,7 +3,7 @@ import Personal from "./Personal";
 import Common from "./Common";
 import Food from "./Food";
 
-export default TabPanel = ({ tabValue }) => {
+export default PageController = ({ tabValue }) => {
   const [date, setDate] = React.useState(); // Maybe set it to today?
   const [amount, setAmount] = React.useState(0);
   const [category, setCategory] = React.useState("");
