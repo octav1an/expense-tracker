@@ -28,3 +28,16 @@ export const CATEGORIES = {
     "Other",
   ],
 };
+
+export const FOOD_SHOPS = [
+  "Other",
+  "Aldi",
+  "Lidl",
+  "Kaufland",
+  "Rewe",
+  "dm",
+  "Rossmann",
+  "Mac-Geiz",
+  "Getranke",
+  "To Good To Go",
+];
