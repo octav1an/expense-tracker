@@ -17,6 +17,7 @@
     "@babel/preset-react": "^7.26.3",
     "@google/clasp": "^2.5.0",
     "@types/google-apps-script": "^1.0.91",
+    "constants-browserify": "^1.0.0",
     "parcel": "^2.13.3",
     "process": "^0.11.10"
   },
