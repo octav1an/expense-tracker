@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, MenuItem, Stack } from "@mui/material";
+import { MenuItem, Stack } from "@mui/material";
+import dayjs from "dayjs";
 
 import TextField from "../components/TextField";
 import DatePicker from "../components/DatePicker";
@@ -7,10 +8,8 @@ import SubmitFormButtons from "../components/SubmitFormButtons";
 import { CATEGORIES } from "../constants";
 import { getSubCategory } from "../utils";
 
-import dayjs from "dayjs";
-
 export default Personal = ({}) => {
-  const [date, setDate] = React.useState(dayjs(new Date())); // Maybe set it to today?
+  const [date, setDate] = React.useState(dayjs(new Date()));
   const [amount, setAmount] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [subCategory, setSubCategory] = React.useState("");
@@ -36,7 +35,7 @@ export default Personal = ({}) => {
       />
       <TextField
         label="Amount (€)"
-        color="personalSpace"
+        colorSpace="personalSpace"
         type="number"
         required
         value={amount}
@@ -44,7 +43,7 @@ export default Personal = ({}) => {
       />
       <TextField
         label="Category"
-        color="personalSpace"
+        colorSpace="personalSpace"
         required
         select
         value={category}
@@ -58,7 +57,7 @@ export default Personal = ({}) => {
       </TextField>
       <TextField
         label="Sub-category"
-        color="personalSpace"
+        colorSpace="personalSpace"
         required
         select
         value={subCategory}
@@ -72,13 +71,13 @@ export default Personal = ({}) => {
       </TextField>
       <TextField
         label="Shop"
-        color="personalSpace"
+        colorSpace="personalSpace"
         value={shop}
         onChange={(e) => setShop(e.target.value)}
       />
       <TextField
         label="Details"
-        color="personalSpace"
+        colorSpace="personalSpace"
         value={details}
         onChange={(e) => setDetails(e.target.value)}
         multiline
