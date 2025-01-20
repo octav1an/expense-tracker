@@ -1,10 +1,12 @@
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+
 import TextField from "./TextField";
 
 export default StyledDatePicker = (props) => {
-  const { colorSpace, required, ...otherProps } = props;
+  const { colorSpace, required, value, onChange, ...otherProps } = props;
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
@@ -13,7 +15,9 @@ export default StyledDatePicker = (props) => {
         slots={{
           textField: TextField,
         }}
-        format="DD/MM/YYYY"
+        format="DD/MM/YYYY" // User facing formatting
+        value={dayjs(value)}
+        onChange={(date) => onChange(date.format("YYYY-MM-DD"))} // Server format
         slotProps={{
           textField: {
             colorSpace,
