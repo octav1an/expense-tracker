@@ -5,7 +5,7 @@
   "scripts": {
     "gstart": "clasp push --watch",
     "start": "parcel client/index.html --dist-dir ./dist",
-    "build": "parcel build client/index.html --no-cache --dist-dir ./dist && ./scripts/move_artifacts.sh"
+    "build": "parcel build client/index.html --no-cache && node ./scripts/env_injector.js && ./scripts/move_artifacts.sh",
   },
   "keywords": [
     "finance"
@@ -28,6 +28,7 @@
     "@mui/material": "^6.3.1",
     "@mui/x-date-pickers": "^7.24.0",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -35,5 +36,13 @@
     "since 2013",
     "not dead",
     "not ie <= 11"
-  ]
+  ],
+  "targets": {
+    "default": {
+      "distDir": "./build",
+      "outputFormat": "global",
+      "sourceMap": false,
+      "optimize": false
+    }
+  }
 }
