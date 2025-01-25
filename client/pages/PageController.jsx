@@ -8,7 +8,6 @@ export default PageController = ({ tabValue }) => {
   const [category, setCategory] = React.useState("");
 
   let componentToRender;
-  console.log(category);
 
   switch (tabValue) {
     case 0:

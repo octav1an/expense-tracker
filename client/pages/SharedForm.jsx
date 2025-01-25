@@ -32,7 +32,6 @@ export default SharedForm = ({ pageType }) => {
 
   const handleDateChange = (date) => {
     // Date picker on change is different and only exposes the date directly not an event
-    console.log();
     setFormData((prevData) => ({
       ...prevData,
       ["date"]: date,
