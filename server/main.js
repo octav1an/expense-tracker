@@ -10,5 +10,3 @@ function doGet() {
 const print = () => {
   console.log("test", ALLOWED_USERS);
 };
-
-exports.doGet = doGet;

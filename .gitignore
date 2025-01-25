@@ -16,7 +16,7 @@ dist/
 
 .parcel-cache/
 .env
-server/envs.gs
+server/envs.js
 
 # FIXME: temporary
 .clasp.json

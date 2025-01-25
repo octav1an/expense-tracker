@@ -19,6 +19,6 @@ function injectEnvVariables(filePath, outputFilePath) {
   fs.writeFileSync(outputFilePath, content, "utf8");
 }
 
-const entryFile = "server/envs_tmp.gs";
-const outputFile = "server/envs.gs";
+const entryFile = "server/envs_tmp.js";
+const outputFile = "server/envs.js";
 injectEnvVariables(entryFile, outputFile);
