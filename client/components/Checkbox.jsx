@@ -1,6 +1,6 @@
 import { FormControlLabel, Checkbox } from "@mui/material";
 
-export default StyledCheckbox = (props) => {
+const StyledCheckbox = (props) => {
   const { colorSpace = "personalSpace", ...otherProps } = props;
   return (
     <FormControlLabel
@@ -9,3 +9,5 @@ export default StyledCheckbox = (props) => {
     />
   );
 };
+
+export default StyledCheckbox;

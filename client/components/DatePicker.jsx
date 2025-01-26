@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 
 import TextField from "./TextField";
 
-export default StyledDatePicker = (props) => {
+const StyledDatePicker = (props) => {
   const { colorSpace, required, value, onChange, ...otherProps } = props;
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -33,3 +33,5 @@ export default StyledDatePicker = (props) => {
     </LocalizationProvider>
   );
 };
+
+export default StyledDatePicker;

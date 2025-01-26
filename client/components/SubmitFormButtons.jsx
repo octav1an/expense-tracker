@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-export default SubmitFormButtons = (props) => {
+const SubmitFormButtons = (props) => {
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <Button
@@ -24,3 +24,5 @@ export default SubmitFormButtons = (props) => {
     </div>
   );
 };
+
+export default SubmitFormButtons;
