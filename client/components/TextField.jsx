@@ -37,7 +37,7 @@ const StyledPaper = styled("div", {
   boxShadow: theme.shadows[8],
 }));
 
-export default StyledTextComponent = (props) => {
+const StyledTextComponent = (props) => {
   // const [value, setValue] = React.useState("");
 
   const { colorSpace = "personalSpace", ...otherProps } = props;
@@ -76,3 +76,5 @@ export default StyledTextComponent = (props) => {
     />
   );
 };
+
+export default StyledTextComponent;

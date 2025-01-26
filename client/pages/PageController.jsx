@@ -2,13 +2,8 @@ import React from "react";
 import SharedForm from "./SharedForm";
 import Food from "./FoodForm";
 
-export default PageController = ({ tabValue }) => {
-  const [date, setDate] = React.useState(); // Maybe set it to today?
-  const [amount, setAmount] = React.useState(0);
-  const [category, setCategory] = React.useState("");
-
+const PageController = ({ tabValue }) => {
   let componentToRender;
-  console.log(category);
 
   switch (tabValue) {
     case 0:
@@ -32,3 +27,4 @@ export default PageController = ({ tabValue }) => {
 
   return componentToRender;
 };
+export default PageController;
