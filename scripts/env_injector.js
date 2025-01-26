@@ -2,23 +2,27 @@ const fs = require("fs");
 const dotenv = require("dotenv");
 
 // Load environment variables
-const env = dotenv.config().parsed;
+dotenv.config();
 
 // Define a function to replace placeholders in the source file
-function injectEnvVariables(filePath, outputFilePath) {
-  let content = fs.readFileSync(filePath, "utf8");
+function injectEnvVariables(outputFilePath) {
+  const envVariables = {
+    SPREADSHEET_ID: process.env.SPREADSHEET_ID || "",
+    ALLOWED_USERS: process.env.ALLOWED_USERS.split(",") || [],
+    COMMON_SHEET: process.env.COMMON_SHEET || "",
+    PENDING_SHEET: process.env.PENDING_SHEET || "",
+    FOOD_SHEET: process.env.FOOD_SHEET || "",
+  };
 
-  // Replace placeholders with environment variable values
-  for (const key in env) {
-    const regex = new RegExp(`${key}: ""`, "g");
-    if (regex.test(content)) {
-      content = content.replace(regex, `${key}: "${env[key]}"`);
-    }
-  }
+  const updatedContent = `export const ENVS = ${JSON.stringify(
+    envVariables,
+    null,
+    2
+  )};`;
 
-  fs.writeFileSync(outputFilePath, content, "utf8");
+  fs.writeFileSync(outputFilePath, updatedContent, "utf8");
 }
 
-const entryFile = "server/envs_tmp.js";
 const outputFile = "server/envs.js";
-injectEnvVariables(entryFile, outputFile);
+
+injectEnvVariables(outputFile);
