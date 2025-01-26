@@ -10,9 +10,9 @@ function injectEnvVariables(filePath, outputFilePath) {
 
   // Replace placeholders with environment variable values
   for (const key in env) {
-    const regex = new RegExp(`let ${key}=`, "g");
+    const regex = new RegExp(`${key}: ""`, "g");
     if (regex.test(content)) {
-      content = content.replace(regex, `let ${key}="${env[key]}";`);
+      content = content.replace(regex, `${key}: "${env[key]}"`);
     }
   }
 
