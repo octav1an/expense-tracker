@@ -19,7 +19,6 @@ export const parseFormData = (formData) => {
       parsedData.push(formData[field]);
     }
   }
-
   return parsedData;
 };
 
