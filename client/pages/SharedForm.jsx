@@ -18,10 +18,17 @@ const SharedForm = ({ pageType }) => {
     shop: "",
     details: "",
     paidForOtherPartner: false, // FIXME
-    _formType: pageType,
+    _formType: "",
   };
 
   const [formData, setFormData] = React.useState(initFormData);
+
+  React.useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      _formType: pageType,
+    }));
+  }, [pageType]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
