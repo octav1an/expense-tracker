@@ -9,7 +9,7 @@ import SubmitFormButtons from "../components/SubmitFormButtons";
 import { CATEGORIES } from "../constants";
 import { getSubCategory } from "../utils";
 
-export default SharedForm = ({ pageType }) => {
+const SharedForm = ({ pageType }) => {
   const initFormData = {
     date: dayjs(new Date()).format("YYYY-MM-DD"),
     amount: "",
@@ -17,6 +17,8 @@ export default SharedForm = ({ pageType }) => {
     subCategory: "",
     shop: "",
     details: "",
+    paidForOtherPartner: false, // FIXME
+    _formType: pageType,
   };
 
   const [formData, setFormData] = React.useState(initFormData);
@@ -38,8 +40,24 @@ export default SharedForm = ({ pageType }) => {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    console.log("Form Submitted:", formData);
+    // eslint-disable-next-line no-undef
+    google.script.run
+      .withSuccessHandler(() => handleSuccessSubmit())
+      .withFailureHandler((res) => console.log("error ", res))
+      .POST_sharedForm(formData);
+  };
+
+  const handleSuccessSubmit = () => {
+    // Form has to be reset after each successful transaction
+    setFormData(initFormData);
+    // TODO: add completion animation
+  };
+
   return (
-    <Box component="form" onSubmit={() => console.log("form submit", formData)}>
+    <Box component="form" onSubmit={handleSubmit}>
       <Stack spacing={3} direction="column">
         <DatePicker
           label="Date"
@@ -112,3 +130,5 @@ export default SharedForm = ({ pageType }) => {
     </Box>
   );
 };
+
+export default SharedForm;

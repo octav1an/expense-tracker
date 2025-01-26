@@ -6,7 +6,7 @@ import TextField from "../components/TextField";
 import DatePicker from "../components/DatePicker";
 import { FOOD_SHOPS } from "../constants";
 
-export default Food = () => {
+const Food = () => {
   const initFormData = {
     date: dayjs(new Date()).format("YYYY-MM-DD"),
     amount: "",
@@ -35,6 +35,17 @@ export default Food = () => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     console.log("Form Submitted:", formData);
+    // eslint-disable-next-line no-undef
+    google.script.run
+      .withSuccessHandler(() => handleSuccessSubmit())
+      .withFailureHandler((res) => console.log("error ", res))
+      .POST_foodForm(formData);
+  };
+
+  const handleSuccessSubmit = () => {
+    // Form has to be reset after each successful transaction
+    setFormData(initFormData);
+    // TODO: add completion animation
   };
 
   return (
@@ -88,3 +99,5 @@ export default Food = () => {
     </Box>
   );
 };
+
+export default Food;
