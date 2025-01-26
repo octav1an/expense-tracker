@@ -1,6 +1,11 @@
 import { ENVS } from "./envs";
 import { parseFormData } from "./utils";
 
+/**
+ * Returns the Sheet object using the name, if not found will create the Sheet with the given name
+ * @param {String} name
+ * @returns
+ */
 export const getOrCreateSheet = (name) => {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(name);
@@ -16,9 +21,8 @@ export const getOrCreateSheet = (name) => {
 /**
  *  Writes an array to specified spread sheet with a sheet name,
  * the operation is synchronous
-
- * @param {string} sheet 
- * @param {Array} arrayToWrite 
+ * @param {string} sheet
+ * @param {Array} arrayToWrite
  */
 export const write = (sheet, contextualFormData) => {
   // Utilities.sleep(5000);
