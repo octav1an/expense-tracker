@@ -13,11 +13,17 @@
   "author": "Octavian Catlabuga",
   "license": "MIT",
   "devDependencies": {
+    "@babel/eslint-parser": "^7.26.5",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
+    "@eslint/js": "^9.19.0",
     "@google/clasp": "^2.5.0",
     "@types/google-apps-script": "^1.0.91",
     "constants-browserify": "^1.0.0",
+    "eslint": "^9.19.0",
+    "eslint-plugin-jest": "^28.11.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "parcel": "^2.13.3",
     "process": "^0.11.10"
   },
