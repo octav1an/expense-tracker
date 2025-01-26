@@ -1,10 +1,12 @@
 const fs = require("fs");
 const dotenv = require("dotenv");
 
-// Load environment variables
 dotenv.config();
 
-// Define a function to replace placeholders in the source file
+/**
+ * Creates the envs.js file with values taken from .env file to avoid exposing any sensitive data
+ * @param {*} outputFilePath
+ */
 function injectEnvVariables(outputFilePath) {
   const envVariables = {
     SPREADSHEET_ID: process.env.SPREADSHEET_ID || "",
