@@ -22,7 +22,7 @@ export const getOrCreateSheet = (name) => {
  *  Writes an array to specified spread sheet with a sheet name,
  * the operation is synchronous
  * @param {string} sheet
- * @param {Array} arrayToWrite
+ * @param {Object} contextualFormData Validate and contextualized form data with all necessary data
  */
 export const write = (sheet, contextualFormData) => {
   // Utilities.sleep(5000);
