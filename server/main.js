@@ -34,8 +34,8 @@ function POST_foodForm(formData) {
 
 // eslint-disable-next-line no-unused-vars
 function POST_sharedForm(formData) {
-  initContext();
   const userEmail = Session.getEffectiveUser().getEmail();
+  initContext();
   validateFormData(formData);
   let contextualFormData = addContext(formData, userEmail);
 
