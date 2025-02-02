@@ -18,10 +18,11 @@ const SharedForm = ({ pageType }) => {
     shop: "",
     details: "",
     paidForOtherPartner: false, // FIXME
-    _formType: "",
+    _formType: "", // TODO: this will reset after the transaction was being sent,
   };
 
   const [formData, setFormData] = React.useState(initFormData);
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     setFormData((prevData) => ({
@@ -49,18 +50,25 @@ const SharedForm = ({ pageType }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+    setLoading(true);
     console.log("Form Submitted:", formData);
     // eslint-disable-next-line no-undef
     google.script.run
-      .withSuccessHandler(() => handleSuccessSubmit())
-      .withFailureHandler((res) => console.log("error ", res))
+      .withSuccessHandler(handleSuccessSubmit)
+      .withFailureHandler(handleFailedSubmit)
       .POST_sharedForm(formData);
   };
 
   const handleSuccessSubmit = () => {
     // Form has to be reset after each successful transaction
     setFormData(initFormData);
-    // TODO: add completion animation
+    setLoading(false);
+  };
+
+  const handleFailedSubmit = (res) => {
+    console.log("error ", res);
+    setLoading(false);
+    // TODO: add an error snack bar
   };
 
   return (
@@ -132,6 +140,7 @@ const SharedForm = ({ pageType }) => {
           colorSpace={pageType}
           onSubmitClick={() => console.log("click submit")}
           onResetClick={() => console.log("click reset")}
+          loading={loading}
         />
       </Stack>
     </Box>
