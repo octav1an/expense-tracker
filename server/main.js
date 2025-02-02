@@ -2,17 +2,16 @@ import { ENVS } from "./envs";
 import {
   addContext,
   getPersonalSheetName,
+  isAuthorizedExternal,
+  isAuthorizedInternal,
   splitAmount,
   validateFormData,
 } from "./utils";
 import { getOrCreateSheet, initContext, write } from "./gas_utils";
 
-// eslint-disable-next-line no-unused-vars
-function doGet() {
+function doGet(e) {
   var userEmail = Session.getEffectiveUser().getEmail();
-  console.log("userEmail", userEmail);
-  // TODO: Add api key check
-  // TODO: check for allowed users
+  isAuthorizedExternal(userEmail, e.parameter.key);
 
   return HtmlService.createTemplateFromFile("index")
     .evaluate()
@@ -26,6 +25,7 @@ function doGet() {
 function POST_foodForm(formData) {
   // TODO: check for allowed users
   const userEmail = Session.getEffectiveUser().getEmail();
+  isAuthorizedInternal(userEmail);
   initContext();
   const sheet = getOrCreateSheet(ENVS.FOOD_SHEET);
   const contextualFormData = addContext(formData, userEmail);
@@ -35,6 +35,7 @@ function POST_foodForm(formData) {
 // eslint-disable-next-line no-unused-vars
 function POST_sharedForm(formData) {
   const userEmail = Session.getEffectiveUser().getEmail();
+  isAuthorizedInternal(userEmail);
   initContext();
   validateFormData(formData);
   let contextualFormData = addContext(formData, userEmail);
@@ -81,8 +82,4 @@ function POST_sharedForm(formData) {
   }
 }
 
-// const print = () => {
-//   var userEmail = Session.getEffectiveUser().getEmail();
-//   console.log("checkl");
-//   console.log(getNameFromEmail(userEmail));
-// };
+export { doGet };
