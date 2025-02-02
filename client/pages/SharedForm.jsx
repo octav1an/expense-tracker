@@ -136,12 +136,7 @@ const SharedForm = ({ pageType }) => {
           onChange={handleChange}
           multiline
         />
-        <SubmitFormButtons
-          colorSpace={pageType}
-          onSubmitClick={() => console.log("click submit")}
-          onResetClick={() => console.log("click reset")}
-          loading={loading}
-        />
+        <SubmitFormButtons colorSpace={pageType} loading={loading} />
       </Stack>
     </Box>
   );

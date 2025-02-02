@@ -99,12 +99,7 @@ const Food = () => {
           onChange={handleChange}
           multiline
         />
-        <SubmitFormButtons
-          colorSpace="foodSpace"
-          onSubmitClick={() => console.log("click submit")}
-          onResetClick={() => console.log("click reset")}
-          loading={loading}
-        />
+        <SubmitFormButtons colorSpace="foodSpace" loading={loading} />
       </Stack>
     </Box>
   );
