@@ -1,5 +1,8 @@
+import { ENVS } from "./envs";
+import { AuthorizationError } from "./errors";
+
 /**
- *
+ * Parse form data and return the data as a list that will be a row in the spreadsheet
  * @param {Object} formData
  * @returns
  */
@@ -73,4 +76,29 @@ export const splitAmount = (formData, userCount) => {
     ...formData,
     amount: formData["amount"] / userCount,
   };
+};
+
+/**
+ * Checks if the external call is authorized
+ *
+ * @param {*} user User email
+ * @param {*} key Api key
+ */
+export const isAuthorizedExternal = (user, key) => {
+  if (!ENVS.ALLOWED_API_KEYS.includes(key)) {
+    throw new AuthorizationError(user);
+  }
+  isAuthorizedInternal(user);
+};
+
+/**
+ * Checks if the internal call is authorized,
+ * for internal call the api key is not passed
+ *
+ * @param {*} user User email
+ */
+export const isAuthorizedInternal = (user) => {
+  if (!ENVS.ALLOWED_USERS.includes(user)) {
+    throw new AuthorizationError(user);
+  }
 };

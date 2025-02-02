@@ -18,5 +18,5 @@ dist/
 .env
 server/envs.js
 
-# FIXME: temporary
+# TODO: temporary
 .clasp.json

@@ -17,7 +17,7 @@ const SharedForm = ({ pageType }) => {
     subCategory: "",
     shop: "",
     details: "",
-    paidForOtherPartner: false, // FIXME
+    paidForOtherPartner: false, // TODO
     _formType: "", // TODO: this will reset after the transaction was being sent,
   };
 
