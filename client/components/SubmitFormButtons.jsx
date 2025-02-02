@@ -9,6 +9,7 @@ const SubmitFormButtons = (props) => {
         type="submit"
         color={props.colorSpace}
         onClick={props.onSubmitClick}
+        loading={props.loading}
       >
         Submit
       </Button>
@@ -18,6 +19,7 @@ const SubmitFormButtons = (props) => {
         type="reset"
         color={props.colorSpace}
         onClick={props.onResetClick}
+        disabled={props.loading}
       >
         Reset
       </Button>
