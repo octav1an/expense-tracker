@@ -59,7 +59,7 @@ function POST_sharedForm(formData) {
         write(personalSheet, contextualFormData); // Write to current user personal sheet
       }
 
-      // FIXME: only 2 users are supported for now
+      // TODO: only 2 users are supported for now
       const otherUsers = ENVS.ALLOWED_USERS.filter(
         (email) => email !== userEmail
       );
