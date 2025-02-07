@@ -52,11 +52,15 @@ const SharedForm = ({ pageType }) => {
     e.preventDefault(); // Prevent default form submission behavior
     setLoading(true);
     console.log("Form Submitted:", formData);
-    // eslint-disable-next-line no-undef
-    google.script.run
-      .withSuccessHandler(handleSuccessSubmit)
-      .withFailureHandler(handleFailedSubmit)
-      .POST_sharedForm(formData);
+    try {
+      // eslint-disable-next-line no-undef
+      google.script.run
+        .withSuccessHandler(handleSuccessSubmit)
+        .withFailureHandler(handleFailedSubmit)
+        .POST_sharedForm(formData);
+    } catch (e) {
+      handleFailedSubmit(e);
+    }
   };
 
   const handleSuccessSubmit = () => {
@@ -66,7 +70,7 @@ const SharedForm = ({ pageType }) => {
   };
 
   const handleFailedSubmit = (res) => {
-    console.log("error ", res);
+    console.error("error ", res);
     setLoading(false);
     // TODO: add an error snack bar
   };
@@ -120,7 +124,20 @@ const SharedForm = ({ pageType }) => {
             </MenuItem>
           ))}
         </TextField>
-        {pageType === "commonSpace" && <Checkbox colorSpace={pageType} />}
+        {pageType === "commonSpace" && (
+          <Checkbox
+            name="paidForOtherPartner"
+            checked={formData.paidForOtherPartner}
+            onChange={(e) => {
+              const { name, checked } = e.target;
+              setFormData((prevData) => ({
+                ...prevData,
+                [name]: checked,
+              }));
+            }}
+            colorSpace={pageType}
+          />
+        )}
         <TextField
           name="shop"
           label="Shop"
