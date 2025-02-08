@@ -65,8 +65,9 @@ clasp deploy -V <version previously created> -d "deployment description"
 ```
 
 **NOTE:** check the "Execute as" and "Who has access" option in the "Manage deployments" UI, and set them as:
-Execute as: User accessing the web app
-Who has access: Anyone with Google account
+
+- Execute as: User accessing the web app
+- Who has access: Anyone with Google account
 
 3. (Optional) To redeploy a newer version on as existing deployment (useful for not keeping the same URL)
 
