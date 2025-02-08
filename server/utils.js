@@ -14,6 +14,7 @@ export const parseFormData = (formData) => {
     "subCategory",
     "shop",
     "details",
+    "id",
     "userEmail",
   ];
   var parsedData = [];
@@ -46,7 +47,7 @@ const isNumber = (value) => {
  */
 export const addContext = (formData, user) => {
   formData["userEmail"] = user;
-formData["id"] = generateTxId();
+  formData["id"] = generateTxId();
   // Cell color order will match the user older
   formData["cellColor"] =
     ENVS.USER_CELL_COLORS[ENVS.ALLOWED_USERS.indexOf(user)];
@@ -105,4 +106,28 @@ export const isAuthorizedInternal = (user) => {
   if (!ENVS.ALLOWED_USERS.includes(user)) {
     throw new AuthorizationError(user);
   }
+};
+
+/**
+ * Generates a transaction ID based on the current date and time.
+ * The format of the transaction ID is "ddmmyyyy-hhmmss".
+ *
+ * @returns {string} The generated transaction ID.
+ */
+export const generateTxId = () => {
+  const date = new Date();
+  const txId = date
+    .toLocaleString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })
+    .replace(/[/,:]/g, "")
+    .replace(/ /g, "-");
+
+  const milliseconds = date.getMilliseconds().toString().padStart(3, "0");
+  return `${txId}-${milliseconds}`;
 };

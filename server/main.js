@@ -7,7 +7,7 @@ import {
   splitAmount,
   validateFormData,
 } from "./utils";
-import { getOrCreateSheet, initContext, write } from "./gas_utils";
+import { getOrCreateSheet, initContext, writeTx } from "./gas_utils";
 
 function doGet(e) {
   var userEmail = Session.getEffectiveUser().getEmail();
@@ -28,7 +28,7 @@ function POST_foodForm(formData) {
   initContext();
   const sheet = getOrCreateSheet(ENVS.FOOD_SHEET);
   const contextualFormData = addContext(formData, userEmail);
-  write(sheet, contextualFormData);
+  writeTx(sheet, contextualFormData);
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -43,13 +43,13 @@ function POST_sharedForm(formData) {
   const personalSheet = getOrCreateSheet(getPersonalSheetName(userEmail));
   switch (formData["formType"]) {
     case "personalSpace": {
-      write(personalSheet, contextualFormData);
+      writeTx(personalSheet, contextualFormData);
       break;
     }
     case "commonSpace": {
       // Write to common sheet
       const commonSheet = getOrCreateSheet(ENVS.COMMON_SHEET);
-      write(commonSheet, contextualFormData);
+      writeTx(commonSheet, contextualFormData);
 
       // Write to personal sheets
       const userCount = ENVS.ALLOWED_USERS.length;
@@ -57,7 +57,7 @@ function POST_sharedForm(formData) {
       // TODO: add tests
       if (!formData["paidForOtherPartner"]) {
         contextualFormData = splitAmount(contextualFormData, userCount);
-        write(personalSheet, contextualFormData); // Write to current user personal sheet
+        writeTx(personalSheet, contextualFormData); // Write to current user personal sheet
       }
 
       // TODO: only 2 users are supported for now
@@ -69,12 +69,12 @@ function POST_sharedForm(formData) {
         const otherUserPersonalSheet = getOrCreateSheet(
           getPersonalSheetName(user)
         );
-        write(otherUserPersonalSheet, contextualFormData);
+        writeTx(otherUserPersonalSheet, contextualFormData);
       }
 
       // Write to pending list
       const pendingSheet = getOrCreateSheet(ENVS.PENDING_SHEET);
-      write(pendingSheet, contextualFormData);
+      writeTx(pendingSheet, contextualFormData);
       break;
     }
     default:
