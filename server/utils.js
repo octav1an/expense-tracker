@@ -110,7 +110,7 @@ export const isAuthorizedInternal = (user) => {
 
 /**
  * Generates a transaction ID based on the current date and time.
- * The format of the transaction ID is "ddmmyyyy-hhmmss".
+ * The format of the transaction ID is "ddmmyyyy-hhmmss-ms".
  *
  * @returns {string} The generated transaction ID.
  */
