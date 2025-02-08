@@ -38,7 +38,6 @@ export const App = () => {
       sx={{
         display: "flex",
         justifyContent: "center",
-        // alignItems: "center",
       }}
     >
       <Stack spacing={2} direction="column">
