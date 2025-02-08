@@ -6,8 +6,8 @@ import TextField from "../components/TextField";
 import DatePicker from "../components/DatePicker";
 import Checkbox from "../components/Checkbox";
 import SubmitFormButtons from "../components/SubmitFormButtons";
-import { CATEGORIES } from "../constants";
-import { getSubCategory } from "../utils";
+import { CATEGORIES } from "../utils/constants";
+import { getSubCategory } from "../utils/utils";
 
 const SharedForm = ({ pageType }) => {
   const [formType, setFormType] = React.useState("");
