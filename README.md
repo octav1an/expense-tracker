@@ -69,7 +69,7 @@ clasp deploy -V <version previously created> -d "deployment description"
 - Execute as: User accessing the web app
 - Who has access: Anyone with Google account
 
-3. (Optional) To redeploy a newer version on as existing deployment (useful for not keeping the same URL)
+3. (Optional) To redeploy a newer version on as existing deployment (useful for keeping the same URL)
 
 ```
 clasp deploy -V <version> -d <deployment description> -i <deployment id>
