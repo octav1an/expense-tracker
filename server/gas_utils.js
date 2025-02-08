@@ -66,16 +66,19 @@ const getSheetHeaders = (name) => {
  * @param {Object} contextualFormData Validate and contextualized form data with all necessary data
  */
 export const write = (sheet, contextualFormData) => {
-  // Utilities.sleep(5000);
-  const row = parseFormData(contextualFormData);
+  const { cellColor, ...contextualFormDataClean } = contextualFormData;
+  const row = parseFormData(contextualFormDataClean);
 
-  // TODO: I think I want to insert new entries at the end of the spreadsheet
+  // TODO: I think I should insert new entries at the end of the spreadsheet
   // Insert a range before the 5th row
   sheet.insertRowBefore(5);
 
   // Write data to the 5th row
   let range = sheet.getRange(5, 1, 1, row.length);
-  range.setValues([row]);
+  range
+.setValues([row])
+    .setBackground(cellColor)
+    .setHorizontalAlignment("center");
 };
 
 /**

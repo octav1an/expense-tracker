@@ -46,6 +46,10 @@ const isNumber = (value) => {
  */
 export const addContext = (formData, user) => {
   formData["userEmail"] = user;
+formData["id"] = generateTxId();
+  // Cell color order will match the user older
+  formData["cellColor"] =
+    ENVS.USER_CELL_COLORS[ENVS.ALLOWED_USERS.indexOf(user)];
   return formData;
 };
 
