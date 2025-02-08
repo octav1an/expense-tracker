@@ -1,6 +1,7 @@
 import { ENVS } from "./envs";
 import {
   addContext,
+  generateTxId,
   getPersonalSheetName,
   isAuthorizedExternal,
   isAuthorizedInternal,
@@ -27,7 +28,7 @@ function POST_foodForm(formData) {
   isAuthorizedInternal(userEmail);
   initContext();
   const sheet = getOrCreateSheet(ENVS.FOOD_SHEET);
-  const contextualFormData = addContext(formData, userEmail);
+  const contextualFormData = addContext(formData, userEmail, generateTxId());
   writeTx(sheet, contextualFormData);
 }
 
@@ -37,7 +38,7 @@ function POST_sharedForm(formData) {
   isAuthorizedInternal(userEmail);
   initContext();
   validateFormData(formData);
-  let contextualFormData = addContext(formData, userEmail);
+  let contextualFormData = addContext(formData, userEmail, generateTxId());
 
   // Get or create the personal sheet
   const personalSheet = getOrCreateSheet(getPersonalSheetName(userEmail));

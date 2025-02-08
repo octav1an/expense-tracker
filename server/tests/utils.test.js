@@ -5,6 +5,8 @@ import {
   splitAmount,
   validateFormData,
 } from "../utils";
+import { addContext } from "../utils";
+import { ENVS } from "../envs";
 
 describe("getNameFromEmail", () => {
   test("should return the name part of the email", () => {
@@ -116,5 +118,38 @@ describe("validateFormData", () => {
       amount: "0",
     };
     expect(() => validateFormData(formData)).toThrow();
+  });
+});
+
+jest.mock("../envs", () => ({
+  ENVS: {
+    USER_CELL_COLORS: ["red", "blue"],
+    ALLOWED_USERS: ["user1@example.com", "user2@example.com"],
+  },
+}));
+
+describe("addContext", () => {
+  test("should add userEmail, id, and cellColor to formData", () => {
+    const formData = { amount: "100" };
+    const user = "user1@example.com";
+    const result = addContext(formData, user, "01012023-123456-789");
+    expect(result).toEqual({
+      amount: "100",
+      userEmail: user,
+      id: "01012023-123456-789",
+      cellColor: "red",
+    });
+  });
+
+  test("should add context correctly for another user", () => {
+    const formData = { amount: "200" };
+    const user = "user2@example.com";
+    const result = addContext(formData, user, "01012023-123456-789");
+    expect(result).toEqual({
+      amount: "200",
+      userEmail: user,
+      id: "01012023-123456-789",
+      cellColor: "blue",
+    });
   });
 });

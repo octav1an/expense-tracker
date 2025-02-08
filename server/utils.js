@@ -45,9 +45,9 @@ const isNumber = (value) => {
  * @param {Object} formData
  * @param {string} user
  */
-export const addContext = (formData, user) => {
+export const addContext = (formData, user, id) => {
   formData["userEmail"] = user;
-  formData["id"] = generateTxId();
+  formData["id"] = id;
   // Cell color order will match the user older
   formData["cellColor"] =
     ENVS.USER_CELL_COLORS[ENVS.ALLOWED_USERS.indexOf(user)];
