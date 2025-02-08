@@ -17,7 +17,7 @@ const StyledDatePicker = (props) => {
         }}
         format="DD/MM/YYYY" // User facing formatting
         value={dayjs(value)}
-        onChange={(date) => onChange(date.format("YYYY-MM-DD"))} // Server format
+        onChange={(date) => onChange("date,", date.format("YYYY-MM-DD"))} // Server format
         slotProps={{
           textField: {
             colorSpace,

@@ -58,9 +58,8 @@ const StyledTextComponent = (props) => {
   return (
     <CssTextField
       {...otherProps}
-      // value={value}
       variant="filled"
-      // onChange={(e) => handleChange(e)}
+      onChange={(e) => props.onChange(e.target.name, e.target.value)}
       color={colorSpace}
       colorSpace={colorSpace}
       slotProps={{
