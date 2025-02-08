@@ -92,4 +92,4 @@ clasp open --webapp
 1. Replace parcel with vite
 2. Add snackbar for failure submit
 3. Add snackbar or other animation for success submit
-4. Color row background with a distinctive color for every user
+4. Use yml file for envs
