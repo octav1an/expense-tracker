@@ -29,7 +29,7 @@ const getTabStyles = (color) => ({
 export const App = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setSelectedTab(newValue);
   };
 

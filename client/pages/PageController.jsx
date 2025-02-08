@@ -7,16 +7,10 @@ const PageController = ({ tabValue }) => {
 
   switch (tabValue) {
     case 0:
-      componentToRender = (
-        <SharedForm
-          pageType="personalSpace"
-          // category={category}
-          // onSetCategory={(e) => setCategory(e.target.value)}
-        />
-      );
+      componentToRender = <SharedForm formType="personalSpace" />;
       break;
     case 1:
-      componentToRender = <SharedForm pageType="commonSpace" />;
+      componentToRender = <SharedForm formType="commonSpace" />;
       break;
     case 2:
       componentToRender = <Food />;

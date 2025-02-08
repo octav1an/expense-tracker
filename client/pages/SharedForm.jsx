@@ -21,8 +21,7 @@ const submitForm = (data, onSuccess, onError) => {
   }
 };
 
-const SharedForm = ({ pageType }) => {
-  const [formType, setFormType] = React.useState("");
+const SharedForm = ({ formType }) => {
   const initFormData = {
     date: dayjs(new Date()).format("YYYY-MM-DD"),
     amount: "",
@@ -38,10 +37,6 @@ const SharedForm = ({ pageType }) => {
     submitForm
   );
 
-  React.useEffect(() => {
-    setFormType(pageType);
-  }, [pageType]);
-
   return (
     <Box
       component="form"
@@ -51,7 +46,7 @@ const SharedForm = ({ pageType }) => {
         <DatePicker
           name="date"
           label="Date"
-          colorSpace={pageType}
+          colorSpace={formType}
           required
           value={formData.date}
           onChange={handleFormChange}
@@ -59,7 +54,7 @@ const SharedForm = ({ pageType }) => {
         <TextField
           name="amount"
           label="Amount (€)"
-          colorSpace={pageType}
+          colorSpace={formType}
           type="number"
           required
           value={formData.amount}
@@ -68,7 +63,7 @@ const SharedForm = ({ pageType }) => {
         <TextField
           name="category"
           label="Category"
-          colorSpace={pageType}
+          colorSpace={formType}
           required
           select
           value={formData.category}
@@ -83,7 +78,7 @@ const SharedForm = ({ pageType }) => {
         <TextField
           name="subCategory"
           label="Sub-category"
-          colorSpace={pageType}
+          colorSpace={formType}
           required
           select
           value={formData.subCategory}
@@ -95,32 +90,32 @@ const SharedForm = ({ pageType }) => {
             </MenuItem>
           ))}
         </TextField>
-        {pageType === "commonSpace" && (
+        {formType === "commonSpace" && (
           <Checkbox
             name="paidForOtherPartner"
             checked={formData.paidForOtherPartner}
             onChange={(e) => {
               handleFormChange(e.target.name, e.target.checked);
             }}
-            colorSpace={pageType}
+            colorSpace={formType}
           />
         )}
         <TextField
           name="shop"
           label="Shop"
-          colorSpace={pageType}
+          colorSpace={formType}
           value={formData.shop}
           onChange={handleFormChange}
         />
         <TextField
           name="details"
           label="Details"
-          colorSpace={pageType}
+          colorSpace={formType}
           value={formData.details}
           onChange={handleFormChange}
           multiline
         />
-        <SubmitFormButtons colorSpace={pageType} loading={loading} />
+        <SubmitFormButtons colorSpace={formType} loading={loading} />
       </Stack>
     </Box>
   );
