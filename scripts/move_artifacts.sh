@@ -5,6 +5,7 @@ set -e
 source .env
 
 
-[  -d $BUILD_DIR ] || mkdir $BUILD_DIR
+[  -d "${BUILD_DIR}" ] || mkdir "${BUILD_DIR}"
 
-rsync -av --progress dist/ $BUILD_DIR --exclude envs_tmp.js --exclude tests
+rsync -av --progress dist/ "${BUILD_DIR}" --exclude envs_tmp.js --exclude tests
+cp appsscript.json "${BUILD_DIR}"

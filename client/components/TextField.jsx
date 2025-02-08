@@ -38,29 +38,14 @@ const StyledPaper = styled("div", {
 }));
 
 const StyledTextComponent = (props) => {
-  // const [value, setValue] = React.useState("");
-
   const { colorSpace = "personalSpace", ...otherProps } = props;
   otherProps;
-
-  // const handleChange = (e) => {
-  //   const inputValue = e.target.value;
-  //   if (type === "number") {
-  //     if (/^\d*\.?\d*$/.test(inputValue)) {
-  //       setValue(inputValue);
-  //     }
-  //   } else {
-  //     setValue(inputValue);
-  //     props.onChange?.(e);
-  //   }
-  // };
 
   return (
     <CssTextField
       {...otherProps}
-      // value={value}
       variant="filled"
-      // onChange={(e) => handleChange(e)}
+      onChange={(e) => props.onChange(e.target.name, e.target.value)}
       color={colorSpace}
       colorSpace={colorSpace}
       slotProps={{

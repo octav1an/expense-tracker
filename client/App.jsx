@@ -29,7 +29,7 @@ const getTabStyles = (color) => ({
 export const App = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setSelectedTab(newValue);
   };
 
@@ -38,7 +38,6 @@ export const App = () => {
       sx={{
         display: "flex",
         justifyContent: "center",
-        // alignItems: "center",
       }}
     >
       <Stack spacing={2} direction="column">

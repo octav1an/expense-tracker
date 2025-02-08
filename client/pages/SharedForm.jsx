@@ -6,11 +6,22 @@ import TextField from "../components/TextField";
 import DatePicker from "../components/DatePicker";
 import Checkbox from "../components/Checkbox";
 import SubmitFormButtons from "../components/SubmitFormButtons";
-import { CATEGORIES } from "../constants";
-import { getSubCategory } from "../utils";
+import { CATEGORIES } from "../utils/constants";
+import { getSubCategory, useFormHandler } from "../utils";
 
-const SharedForm = ({ pageType }) => {
-  const [formType, setFormType] = React.useState("");
+const submitForm = (data, onSuccess, onError) => {
+  try {
+    // eslint-disable-next-line no-undef
+    google.script.run
+      .withSuccessHandler(onSuccess)
+      .withFailureHandler(onError)
+      .POST_sharedForm(data);
+  } catch (e) {
+    onError(e);
+  }
+};
+
+const SharedForm = ({ formType }) => {
   const initFormData = {
     date: dayjs(new Date()).format("YYYY-MM-DD"),
     amount: "",
@@ -21,85 +32,42 @@ const SharedForm = ({ pageType }) => {
     paidForOtherPartner: false,
   };
 
-  const [formData, setFormData] = React.useState(initFormData);
-  const [loading, setLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    setFormType(pageType);
-  }, [pageType]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-      ...(name === "category" && { subCategory: "" }), // reset subCategory when category is changed
-    }));
-  };
-
-  const handleDateChange = (date) => {
-    // Date picker on change is different and only exposes the date directly not an event
-    setFormData((prevData) => ({
-      ...prevData,
-      ["date"]: date,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setLoading(true);
-    const fullFormData = { ...formData, _formType: formType };
-    console.log("Form Submitted:", fullFormData);
-    try {
-      // eslint-disable-next-line no-undef
-      google.script.run
-        .withSuccessHandler(handleSuccessSubmit)
-        .withFailureHandler(handleFailedSubmit)
-        .POST_sharedForm(fullFormData);
-    } catch (e) {
-      handleFailedSubmit(e);
-    }
-  };
-
-  const handleSuccessSubmit = () => {
-    // Form has to be reset after each successful transaction
-    setFormData(initFormData);
-    setLoading(false);
-  };
-
-  const handleFailedSubmit = (res) => {
-    console.error("error ", res);
-    setLoading(false);
-    // TODO: add an error snack bar
-  };
+  const { formData, loading, handleFormChange, handleSubmit } = useFormHandler(
+    initFormData,
+    submitForm
+  );
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      onSubmit={(e) => handleSubmit(e, { ...formData, formType: formType })}
+    >
       <Stack spacing={3} direction="column">
         <DatePicker
+          name="date"
           label="Date"
-          colorSpace={pageType}
+          colorSpace={formType}
           required
           value={formData.date}
-          onChange={handleDateChange}
+          onChange={handleFormChange}
         />
         <TextField
           name="amount"
           label="Amount (€)"
-          colorSpace={pageType}
+          colorSpace={formType}
           type="number"
           required
           value={formData.amount}
-          onChange={handleChange}
+          onChange={handleFormChange}
         />
         <TextField
           name="category"
           label="Category"
-          colorSpace={pageType}
+          colorSpace={formType}
           required
           select
           value={formData.category}
-          onChange={handleChange}
+          onChange={handleFormChange}
         >
           {Object.keys(CATEGORIES).map((option) => (
             <MenuItem key={option} value={option}>
@@ -110,11 +78,11 @@ const SharedForm = ({ pageType }) => {
         <TextField
           name="subCategory"
           label="Sub-category"
-          colorSpace={pageType}
+          colorSpace={formType}
           required
           select
           value={formData.subCategory}
-          onChange={handleChange}
+          onChange={handleFormChange}
         >
           {getSubCategory(formData.category).map((option) => (
             <MenuItem key={option} value={option}>
@@ -122,36 +90,32 @@ const SharedForm = ({ pageType }) => {
             </MenuItem>
           ))}
         </TextField>
-        {pageType === "commonSpace" && (
+        {formType === "commonSpace" && (
           <Checkbox
             name="paidForOtherPartner"
             checked={formData.paidForOtherPartner}
             onChange={(e) => {
-              const { name, checked } = e.target;
-              setFormData((prevData) => ({
-                ...prevData,
-                [name]: checked,
-              }));
+              handleFormChange(e.target.name, e.target.checked);
             }}
-            colorSpace={pageType}
+            colorSpace={formType}
           />
         )}
         <TextField
           name="shop"
           label="Shop"
-          colorSpace={pageType}
+          colorSpace={formType}
           value={formData.shop}
-          onChange={handleChange}
+          onChange={handleFormChange}
         />
         <TextField
           name="details"
           label="Details"
-          colorSpace={pageType}
+          colorSpace={formType}
           value={formData.details}
-          onChange={handleChange}
+          onChange={handleFormChange}
           multiline
         />
-        <SubmitFormButtons colorSpace={pageType} loading={loading} />
+        <SubmitFormButtons colorSpace={formType} loading={loading} />
       </Stack>
     </Box>
   );

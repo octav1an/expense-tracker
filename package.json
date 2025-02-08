@@ -6,7 +6,7 @@
     "gstart": "clasp push --watch",
     "start": "parcel client/index.html --dist-dir ./dist",
     "build": "parcel build client/index.html --dist-dir build --no-cache && node ./scripts/env_injector.js && vite build && ./scripts/move_artifacts.sh",
-    "deploy": "npm run build && clasp push",
+    "publish": "npm run build && clasp push -f",
     "test": "jest"
   },
   "keywords": [

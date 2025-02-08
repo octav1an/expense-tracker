@@ -5,7 +5,20 @@ import dayjs from "dayjs";
 import TextField from "../components/TextField";
 import DatePicker from "../components/DatePicker";
 import SubmitFormButtons from "../components/SubmitFormButtons";
-import { FOOD_SHOPS } from "../constants";
+import { FOOD_SHOPS } from "../utils/constants";
+import { useFormHandler } from "../utils";
+
+const submitForm = (data, onSuccess, onError) => {
+  try {
+    // eslint-disable-next-line no-undef
+    google.script.run
+      .withSuccessHandler(onSuccess)
+      .withFailureHandler(onError)
+      .POST_foodForm(data);
+  } catch (err) {
+    onError(err);
+  }
+};
 
 const Food = () => {
   const initFormData = {
@@ -15,61 +28,20 @@ const Food = () => {
     details: "",
   };
 
-  const [formData, setFormData] = React.useState(initFormData);
-  const [loading, setLoading] = React.useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleDateChange = (date) => {
-    // Date picker on change is different and only exposes the date directly not an event
-    setFormData((prevData) => ({
-      ...prevData,
-      ["date"]: date,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setLoading(true);
-    console.log("Form Submitted:", formData);
-    try {
-      // eslint-disable-next-line no-undef
-      google.script.run
-        .withSuccessHandler(handleSuccessSubmit)
-        .withFailureHandler(handleFailedSubmit)
-        .POST_foodForm(formData);
-    } catch (e) {
-      handleFailedSubmit(e);
-    }
-  };
-
-  const handleSuccessSubmit = () => {
-    // Form has to be reset after each successful transaction
-    setFormData(initFormData);
-    setLoading(false);
-  };
-
-  const handleFailedSubmit = (res) => {
-    console.log("error ", res);
-    setLoading(false);
-    // TODO: add an error snack bar
-  };
+  const { formData, loading, handleFormChange, handleSubmit } = useFormHandler(
+    initFormData,
+    submitForm
+  );
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box component="form" onSubmit={(e) => handleSubmit(e, formData)}>
       <Stack spacing={3} direction="column">
         <DatePicker
           label="Date"
           colorSpace="foodSpace"
           required
           value={formData.date}
-          onChange={handleDateChange}
+          onChange={handleFormChange}
         />
         <TextField
           name="amount"
@@ -78,7 +50,7 @@ const Food = () => {
           type="number"
           required
           value={formData.amount}
-          onChange={handleChange}
+          onChange={handleFormChange}
         />
         <TextField
           name="shop"
@@ -87,7 +59,7 @@ const Food = () => {
           required
           select
           value={formData.shop}
-          onChange={handleChange}
+          onChange={handleFormChange}
         >
           {FOOD_SHOPS.map((option) => (
             <MenuItem key={option} value={option}>
@@ -100,7 +72,7 @@ const Food = () => {
           label="Details"
           colorSpace="foodSpace"
           value={formData.details}
-          onChange={handleChange}
+          onChange={handleFormChange}
           multiline
         />
         <SubmitFormButtons colorSpace="foodSpace" loading={loading} />
