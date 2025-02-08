@@ -10,6 +10,7 @@ import { CATEGORIES } from "../constants";
 import { getSubCategory } from "../utils";
 
 const SharedForm = ({ pageType }) => {
+  const [formType, setFormType] = React.useState("");
   const initFormData = {
     date: dayjs(new Date()).format("YYYY-MM-DD"),
     amount: "",
@@ -17,18 +18,14 @@ const SharedForm = ({ pageType }) => {
     subCategory: "",
     shop: "",
     details: "",
-    paidForOtherPartner: false, // TODO
-    _formType: "", // TODO: this will reset after the transaction was being sent,
+    paidForOtherPartner: false,
   };
 
   const [formData, setFormData] = React.useState(initFormData);
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      _formType: pageType,
-    }));
+    setFormType(pageType);
   }, [pageType]);
 
   const handleChange = (e) => {
@@ -51,13 +48,14 @@ const SharedForm = ({ pageType }) => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     setLoading(true);
-    console.log("Form Submitted:", formData);
+    const fullFormData = { ...formData, _formType: formType };
+    console.log("Form Submitted:", fullFormData);
     try {
       // eslint-disable-next-line no-undef
       google.script.run
         .withSuccessHandler(handleSuccessSubmit)
         .withFailureHandler(handleFailedSubmit)
-        .POST_sharedForm(formData);
+        .POST_sharedForm(fullFormData);
     } catch (e) {
       handleFailedSubmit(e);
     }

@@ -23,7 +23,6 @@ function doGet(e) {
 
 // eslint-disable-next-line no-unused-vars
 function POST_foodForm(formData) {
-  // TODO: check for allowed users
   const userEmail = Session.getEffectiveUser().getEmail();
   isAuthorizedInternal(userEmail);
   initContext();
@@ -55,6 +54,7 @@ function POST_sharedForm(formData) {
       // Write to personal sheets
       const userCount = ENVS.ALLOWED_USERS.length;
       // The amount will normally be split between users, but not when one partner pays for the other partner
+      // TODO: add tests
       if (!formData["paidForOtherPartner"]) {
         contextualFormData = splitAmount(contextualFormData, userCount);
         write(personalSheet, contextualFormData); // Write to current user personal sheet
