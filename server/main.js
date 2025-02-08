@@ -41,7 +41,7 @@ function POST_sharedForm(formData) {
 
   // Get or create the personal sheet
   const personalSheet = getOrCreateSheet(getPersonalSheetName(userEmail));
-  switch (formData["_formType"]) {
+  switch (formData["formType"]) {
     case "personalSpace": {
       write(personalSheet, contextualFormData);
       break;
@@ -78,7 +78,7 @@ function POST_sharedForm(formData) {
       break;
     }
     default:
-      throw new Error(`Not implemented: formType=${formData["_formType"]}`);
+      throw new Error(`Not implemented: formType=${formData["formType"]}`);
   }
 }
 

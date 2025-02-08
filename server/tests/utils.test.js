@@ -43,7 +43,7 @@ describe("getPersonalSheetName", () => {
 describe("parseFormData", () => {
   test("should return the form data that is stored", () => {
     const formData = {
-      _formType: "personalSpace",
+      formType: "personalSpace",
       amount: "1",
       category: "Basic",
       date: "2025-01-26",
@@ -71,7 +71,7 @@ describe("parseFormData", () => {
 describe("splitAmount", () => {
   test("should the return the parsed data with the amount split for every user", () => {
     const formData = {
-      _formType: "commonSpace",
+      formType: "commonSpace",
       amount: "1",
       category: "Basic",
       date: "2025-01-26",

@@ -40,7 +40,7 @@ const SharedForm = ({ formType }) => {
   return (
     <Box
       component="form"
-      onSubmit={(e) => handleSubmit(e, { ...formData, _formType: formType })}
+      onSubmit={(e) => handleSubmit(e, { ...formData, formType: formType })}
     >
       <Stack spacing={3} direction="column">
         <DatePicker
