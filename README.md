@@ -69,7 +69,7 @@ clasp deploy -V <version previously created> -d "deployment description"
 - Execute as: User accessing the web app
 - Who has access: Anyone with Google account
 
-3. (Optional) To redeploy a newer version on as existing deployment (useful for not keeping the same URL)
+3. (Optional) To redeploy a newer version on as existing deployment (useful for keeping the same URL)
 
 ```
 clasp deploy -V <version> -d <deployment description> -i <deployment id>
@@ -92,4 +92,4 @@ clasp open --webapp
 1. Replace parcel with vite
 2. Add snackbar for failure submit
 3. Add snackbar or other animation for success submit
-4. Color row background with a distinctive color for every user
+4. Use yml file for envs

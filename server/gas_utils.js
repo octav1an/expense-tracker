@@ -41,7 +41,7 @@ export const getOrCreateSheet = (name) => {
 const getSheetHeaders = (name) => {
   switch (name) {
     case ENVS.FOOD_SHEET:
-      return ["Date", "Amount", "Shop", "Details", "User"];
+      return ["Date", "Amount", "Shop", "Details", "Id", "User"];
     case ENVS.COMMON_SHEET:
     case ENVS.PENDING_SHEET:
     case name.endsWith("-data") && name: // Every sheet name that ends in '-data' is a user sheet
@@ -52,6 +52,7 @@ const getSheetHeaders = (name) => {
         "Sub-category",
         "Shop",
         "Details",
+        "Id",
         "User",
       ];
     default:
@@ -65,17 +66,20 @@ const getSheetHeaders = (name) => {
  * @param {string} sheet
  * @param {Object} contextualFormData Validate and contextualized form data with all necessary data
  */
-export const write = (sheet, contextualFormData) => {
-  // Utilities.sleep(5000);
-  const row = parseFormData(contextualFormData);
+export const writeTx = (sheet, contextualFormData) => {
+  const { cellColor, ...contextualFormDataClean } = contextualFormData;
+  const row = parseFormData(contextualFormDataClean);
 
-  // TODO: I think I want to insert new entries at the end of the spreadsheet
+  // TODO: I think I should insert new entries at the end of the spreadsheet
   // Insert a range before the 5th row
   sheet.insertRowBefore(5);
 
   // Write data to the 5th row
   let range = sheet.getRange(5, 1, 1, row.length);
-  range.setValues([row]);
+  range
+    .setValues([row])
+    .setBackground(cellColor)
+    .setHorizontalAlignment("center");
 };
 
 /**
