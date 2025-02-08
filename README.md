@@ -18,6 +18,26 @@ To pull and push changes from google app script project:
 clasp push
 ```
 
+**NOTE** to open the app add `?key=<allowed key from .env>` to the url
+
+### Create new app
+
+1. Create new google app script of type "webapp"
+
+```
+./scripts/create_app.sh
+```
+
+2. Update `.env.tmp` and rename the file as `.env`
+
+3. Build and publish the project
+
+```
+npm run publish
+```
+
+NOTE: yes for "Manifest file has been updated. Do you want to push and overwrite?"
+
 ### How secrets are handled
 
 1. Add all the necessary secrets/envs in the `.env` file
@@ -71,7 +91,4 @@ clasp open --webapp
 1. Replace parcel with vite
 2. Add snackbar for failure submit
 3. Add snackbar or other animation for success submit
-
-```
-
-```
+4. Color row background with a distinctive color for every user
