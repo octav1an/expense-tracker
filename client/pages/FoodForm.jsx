@@ -38,11 +38,15 @@ const Food = () => {
     e.preventDefault(); // Prevent default form submission behavior
     setLoading(true);
     console.log("Form Submitted:", formData);
-    // eslint-disable-next-line no-undef
-    google.script.run
-      .withSuccessHandler(handleSuccessSubmit)
-      .withFailureHandler(handleFailedSubmit)
-      .POST_foodForm(formData);
+    try {
+      // eslint-disable-next-line no-undef
+      google.script.run
+        .withSuccessHandler(handleSuccessSubmit)
+        .withFailureHandler(handleFailedSubmit)
+        .POST_foodForm(formData);
+    } catch (e) {
+      handleFailedSubmit(e);
+    }
   };
 
   const handleSuccessSubmit = () => {

@@ -31,7 +31,6 @@ describe("doGet", () => {
 
   it("should authorize a valid user with a valid key", () => {
     const mockEvent = { parameter: { key: "valid-key" } };
-
     expect(() => doGet(mockEvent)).not.toThrow();
   });
 
