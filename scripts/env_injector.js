@@ -12,6 +12,7 @@ function injectEnvVariables(outputFilePath) {
     SPREADSHEET_ID: process.env.SPREADSHEET_ID || "",
     ALLOWED_USERS: process.env.ALLOWED_USERS.split(",") || [],
     ALLOWED_API_KEYS: process.env.ALLOWED_API_KEYS.split(",") || [],
+    USER_CELL_COLORS: process.env.USER_CELL_COLORS.split(",") || [],
     COMMON_SHEET: process.env.COMMON_SHEET || "",
     PENDING_SHEET: process.env.PENDING_SHEET || "",
     FOOD_SHEET: process.env.FOOD_SHEET || "",
