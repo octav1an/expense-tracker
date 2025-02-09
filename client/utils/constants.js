@@ -7,6 +7,7 @@ export const CATEGORIES = {
     "Transportation",
     "Insurance",
     "Bureaucracy",
+    "Tako",
   ],
   Living: [
     "Eating Out",
