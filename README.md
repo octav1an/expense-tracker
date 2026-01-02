@@ -52,16 +52,22 @@ NOTE: yes for "Manifest file has been updated. Do you want to push and overwrite
 
 ## Deployment
 
-1. Create a version of the code
+1. Publish the latest build
+
+```
+npm run publish
+```
+
+2. Create a version of the code
 
 ```
 clasp version "version description"
 ```
 
-2. Create new deployment
+3. Create new deployment
 
 ```
-clasp deploy -V <version previously created> -d "deployment description"
+clasp deploy -V <version number> -d "deployment description"
 ```
 
 **NOTE:** check the "Execute as" and "Who has access" option in the "Manage deployments" UI, and set them as:
@@ -69,7 +75,7 @@ clasp deploy -V <version previously created> -d "deployment description"
 - Execute as: User accessing the web app
 - Who has access: Anyone with Google account
 
-3. (Optional) To redeploy a newer version on as existing deployment (useful for keeping the same URL)
+4. (Optional) To redeploy a newer version on as existing deployment (useful for keeping the same URL)
 
 ```
 clasp deploy -V <version> -d <deployment description> -i <deployment id>
@@ -82,9 +88,7 @@ NOTE: to get the deployment id use `clasp deployments`
 Get the head deployed url for the webapp:
 
 ```
-
-clasp open --webapp
-
+clasp open-web-app
 ```
 
 ## TODO:
