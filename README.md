@@ -81,7 +81,8 @@ clasp deploy -V <version number> -d "deployment description"
 clasp deploy -V <version> -d <deployment description> -i <deployment id>
 ```
 
-NOTE: to get the deployment id use `clasp deployments`
+NOTE: To get the deployment id use `clasp deployments`, the versions are at the end
+or check the google UI
 
 ## Useful commands
 
